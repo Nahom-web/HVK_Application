@@ -1,0 +1,13 @@
+﻿@model HVK_Queen.Models.Reservation
+
+<fieldset class="InfoGridFieldset">
+    <legend>Reservation Date</legend>
+    <div class="gridForm">
+        <label asp-for="@Model.StartDate"></label>
+        <input asp-for="@Model.StartDate" />
+        <span asp-validation-for="@Model.StartDate"></span>
+        <label asp-for="@Model.EndDate"></label>
+        <input asp-for="@Model.EndDate" />
+        <span asp-validation-for="@Model.EndDate"></span>
+    </div>
+</fieldset>

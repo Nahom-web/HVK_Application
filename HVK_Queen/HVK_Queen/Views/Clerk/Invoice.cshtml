@@ -1,0 +1,139 @@
+﻿@inject HVK_Queen.Models.FormattingService DisplayFormat
+
+@model HVK_Queen.Models.Reservation
+
+@{
+    Layout = "_ClerkLayout";
+}
+
+
+<main>
+    <div class="invoiceContainer">
+        <div class="head">
+            <h2 class="text-start">INVOICE</h2>
+            <p>Date:  @DisplayFormat.DateFormat(@DateTime.Today) <br />Invoice # 100</p>
+        </div>
+        <div class="invoiceInfo">
+            <div id="infoLeft">
+                <p>
+                    Happy Valley Kennels<br />
+                    123 Chemin Scott<br />
+                    Chelsea, QC J9B 1R6<br />
+                    819-123-4567<br />
+                    info@happyvalleykennel.ca
+                </p>
+            </div>
+            <div id="infoRight">
+                @await Html.PartialAsync("_OwnersInformation", @Model.PetReservation.First().Pet.Owner)
+            </div>
+        </div>
+        <div class="details">
+            <table class="table table-bordered">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Reservation Start</th>
+                        <th>Reservation End</th>
+                        <th>Number of days</th>
+                        <th>Payment Terms</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@DisplayFormat.DateFormat(@Model.StartDate)</td>
+                        <td>@DisplayFormat.DateFormat(@Model.EndDate)</td>
+                        <td>@ViewBag.Days</td>
+                        <td>Due on receipt</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="details">
+            <table class="table table-bordered">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Description</th>
+                        <th>Daily Rate</th>
+                        <th>Number of days</th>
+                        <th>Item Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var petRes in Model.PetReservation) {
+                        @foreach (var service in petRes.PetReservationService) {
+                            decimal rate = 0;
+                            <tr>
+                                <td class="description">@service.Service.ServiceDescription - @petRes.Pet.Name</td>
+                                @foreach (var d in service.Service.DailyRate) {
+                                    @if (petRes.Pet.DogSize == d.DogSize) {
+                                        rate = d.Rate;
+                                        Model.AddToSubtotal(rate, Model.GetReservationDays(petRes.Reservation.StartDate, petRes.Reservation.EndDate));
+                                        <td class="rate">@d.Rate</td>
+                                    }
+                                    @if (d.DogSize == null && service.ServiceId == 4) {
+                                        rate = d.Rate;
+                                        Model.AddToSubtotal(rate, Model.GetReservationDays(petRes.Reservation.StartDate, petRes.Reservation.EndDate));
+                                        <td class="rate">@d.Rate</td>
+                                    }
+                                }
+                                <td class="numberOfDays">@Model.GetReservationDays(petRes.Reservation.StartDate, petRes.Reservation.EndDate)</td>
+                                <td class="itemTotal">@Model.CalculateTotalCost(Model.GetReservationDays(petRes.Reservation.StartDate, petRes.Reservation.EndDate), rate)</td>
+                            </tr>
+                            @if (petRes.PetReservationDiscount != null && service.Service.ServiceDescription == "Boarding") {
+                                @foreach (var petDiscount in petRes.PetReservationDiscount) {
+                                    double total = Model.CalculateTotalCost(Model.GetReservationDays(petRes.Reservation.StartDate, petRes.Reservation.EndDate), Model.AddPetDiscount(rate, petDiscount.Discount.Percentage));
+                                    Model.AddToSubtotal((decimal)total, 1.0);
+                                    <tr>
+                                        <td class="description">@petDiscount.Discount.Desciption (@Model.DisplayPercentage(petDiscount.Discount.Percentage)) - @petRes.Pet.Name</td>
+                                        <td class="rate">@Model.AddPetDiscount(rate, petDiscount.Discount.Percentage)</td>
+                                        <td class="numberOfDays">@Model.GetReservationDays(petRes.Reservation.StartDate, petRes.Reservation.EndDate)</td>
+                                        <td class="itemTotal">@Model.CalculateTotalCost(Model.GetReservationDays(petRes.Reservation.StartDate, petRes.Reservation.EndDate), Model.AddPetDiscount(rate, petDiscount.Discount.Percentage))</td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    }
+                    <tr>
+                        <td colspan="3" class="calculationSummary">Subtotal</td>
+                        <td class="result">@String.Format("{0:0.00}", Model.Subtotal)</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="calculationSummary">Discount – 3 or more pets (7%)</td>
+                        <td class="result">
+                            @if (Model.ReservationDiscount != null && Model.ReservationDiscount.Count != 0) {
+                                @foreach (var d in Model.ReservationDiscount) {
+                                    <span>@DisplayFormat.CurrencyFormat(@Model.CalculateReservationDiscount(d.Discount.Percentage))</span>
+                                    Model.AddToSubtotal((decimal)-Model.CalculateReservationDiscount(d.Discount.Percentage), 1.0);
+                                }
+                            } else {
+                                <span>0.00</span>
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="calculationSummary">Subtotal after discount</td>
+                        <td class="result">@DisplayFormat.CurrencyFormat(Model.Subtotal)</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="calculationSummary">HST</td>
+                        <td class="result">
+                            @DisplayFormat.CurrencyFormat(Model.CalculateHST())
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="calculationSummary">Total</td>
+                        <td class="result">
+                            @DisplayFormat.CurrencyFormat(Model.Subtotal)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="invoiceMessageWithPicture">
+            <img src="~/Images/hvk_logo.png" />
+            <p>Thank you for your business!</p>
+        </div>
+    </div>
+    <div class="text-center" id="printButtonDiv">
+        <a class="btn btn-success text-center" href="@Url.Action("Index", "Clerk", new { title = "go to Home" })">Print</a>
+    </div>
+</main>

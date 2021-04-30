@@ -1,0 +1,138 @@
+﻿@inject HVK_Queen.Models.FormattingService DisplayFormat
+
+@{
+    Layout = "_ClerkLayout";
+}
+
+@model HVK_Queen.Models.Reservation
+
+
+<main>
+    <h3 class="text-center">Contract Preview</h3>
+    <div class="contractcontainer">
+        <h4 class="text-center">Happy Valley Kennels Inc.</h4>
+        <h4 class="text-center font-weight-bold">Boarding Contract</h4>
+        <hr />
+        <div class="contractdetail">
+            <p id="date" class="text-right">Date: @DisplayFormat.DateFormat(@DateTime.Today)</p>
+            <div id="aroundOwnerInformation">
+                <div id="ownerInformation">
+                    <div id="ownerTitle">
+                        <h5 class="text-left">Owner</h5>
+                        <h5 class="text-left">Emergency Contact:</h5>
+                    </div>
+                    @await Html.PartialAsync("_OwnersInformation", @Model.PetReservation.First().Pet.Owner)
+                    <div id="emergencyContactInfo">
+                        <p class="infoLabel">Name: </p>
+                        <p class="infoValue">
+                            @if (@Model.PetReservation.First().Pet.Owner.EmergencyContactFirstName != null &&
+                              @Model.PetReservation.First().Pet.Owner.EmergencyContactLastName != null) {
+                                @Model.PetReservation.First().Pet.Owner.EmergencyContactFirstName @Model.PetReservation.First().Pet.Owner.EmergencyContactLastName
+                            } else {
+                                <span>Name Not Provided</span>
+                            }
+                        </p>
+                        <p class="infoLabel">Phone: </p>
+                        <p class="infoValue">
+                            @if (@Model.PetReservation.First().Pet.Owner.EmergencyContactPhone != null) {
+                                @DisplayFormat.PhoneFormat(@Model.PetReservation.First().Pet.Owner.EmergencyContactPhone)
+                            } else {
+                                <span>Phone Not Provided</span>
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div id="reservationDurationDiv">
+                <div id="reservationDuration">
+                    <div id="reservationTitle">
+                        <h5 class="text-left">Reservation</h5>
+                    </div>
+                    <div class="date">
+                        <p class="text-left font-weight-bold">Start Date: </p>
+                        <p class="text-left underlinedText">@DisplayFormat.DateFormat(@Model.StartDate)</p>
+                    </div>
+                    <div class="date">
+                        <p class="text-left font-weight-bold">End Date: </p>
+                        <p class="text-left underlinedText">@DisplayFormat.DateFormat(@Model.EndDate)</p>
+                    </div>
+                    <div class="date">
+                        <p class="text-left font-weight-bold">Number of days: </p>
+                        <p class="text-left underlinedText">@ViewBag.Days</p>
+                    </div>
+                </div>
+            </div>
+            <div id="allPetsSummary">
+                @foreach (var petRes in Model.PetReservation) {
+                    <div class="singlePetSummary">
+                        <div class="petDetails">
+                            <div id="petTitle">
+                                <h5 class="text-left font-weight-bold">Pet</h5>
+                            </div>
+                            <div>
+                                <p class="text-left font-weight-bold">Name: </p>
+                                <p class="text-left petName">@petRes.Pet.Name</p>
+                            </div>
+                            <div>
+                                <p class="text-left font-weight-bold">Size: </p>
+                                <p class="text-left petsDogSize">@DisplayFormat.DogSizeFormat(@petRes.Pet.DogSize)</p>
+                            </div>
+                            <div class="specialNotesTitle text-left font-weight-bold">
+                                <p>Special Needs/Notes: </p>
+                            </div>
+                            <div>
+                                <p class="text-left">
+                                    @if (petRes.Pet.SpecialNotes != null) {
+                                        <span>@petRes.Pet.SpecialNotes.Notes</span>
+                                    } else {
+                                        <span>No Notes Provided</span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                        <div class="services">
+                            <div id="serviesTitle">
+                                <h5 class="text-left font-weight-bold">Services</h5>
+                                <div id="serviesList">
+                                    @foreach (var service in petRes.PetReservationService) {
+                                        <div>
+                                            <img src="~/Images/checkMark.svg" alt="check mark icon">
+                                            @service.Service.ServiceDescription
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dailyRate">
+                            <div id="dailyRateTitle">
+                                <h5 class="text-left font-weight-bold">Daily Rate</h5>
+                                <div id="dailyRateCost">
+                                    @foreach (var services in petRes.PetReservationService) {
+                                        @foreach (var d in services.Service.DailyRate) {
+                                            @if (petRes.Pet.DogSize == d.DogSize) {
+                                                <p>@d.Rate</p>
+                                            }
+                                            @if (d.DogSize == null && services.ServiceId == 4) {
+                                                <p>@d.Rate</p>
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <p id="termsAndConditions">I understand and agree to the terms and condictions of this contract(see reserse side) and agree that Happy Valley Kennels is not liable for loss or illness of my pet.</p>
+        <div id="signAndDate">
+            <hr class="line" />
+            <p class="text-left" id="signatureMessage">Signature of Owner</p>
+            <p class="text-right">Date</p>
+        </div>
+
+    </div>
+    <div class="text-center" id="printContractButtonDiv">
+        <a class="btn btn-success text-center" href="@Url.Action("Index", "Clerk")">Print Contract</a>
+    </div>
+</main>

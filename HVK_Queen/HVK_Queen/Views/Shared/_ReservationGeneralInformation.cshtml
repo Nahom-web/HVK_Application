@@ -1,0 +1,24 @@
+﻿@model HVK_Queen.Models.Reservation
+
+<td class="owner">
+    @{ bool displayedOwner = false; }
+    @foreach (var petRes in Model.PetReservation) {
+        if (!displayedOwner) {
+            <span>@petRes.Pet.Owner.FirstName  @petRes.Pet.Owner.LastName</span>
+        }
+        displayedOwner = true;
+    }
+</td>
+<td class="pets">
+    @{ int petId = 0;}
+    @foreach (var x in Model.PetReservation) {
+        petId = x.Pet.PetId;
+    }
+    @foreach (var x in Model.PetReservation) {
+        if (x.Pet.PetId != petId) {
+            <span>@x.Pet.Name, </span>
+        } else {
+            <span>@x.Pet.Name</span>
+        }
+    }
+</td>

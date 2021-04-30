@@ -1,0 +1,19 @@
+﻿@model HVK_Queen.Models.PetReservation
+
+<fieldset class="InfoGridFieldset">
+    <legend>Services</legend>
+
+    <div class="gridForm">
+        <label asp-for="@Model.InReservation" for="@Model.PetId-InReservation">Boarding</label>
+        <input name="@Model.PetId-inResBool" asp-for="@Model.InReservation" id="@Model.PetId-InReservation" />
+        <input name="petName" value=@Model.PetId hidden />
+
+        <label asp-for="@Model.Walk" for="@Model.PetId-walk"></label>
+        <input name="@Model.PetId-walkBool" asp-for="@Model.Walk" id="@Model.PetId-walk" />
+        <span asp-validation-for="@Model.Walk"></span>
+
+        <label asp-for="@Model.Playtime" for="@Model.PetId-playtime"></label>
+        <input name="@Model.PetId-playtimeBool" asp-for="@Model.Playtime" id="@Model.PetId-playtime" />
+        <span asp-validation-for="@Model.Playtime"></span>
+    </div>
+</fieldset>

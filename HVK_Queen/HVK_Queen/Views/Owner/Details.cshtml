@@ -1,0 +1,46 @@
+﻿@inject HVK_Queen.Models.FormattingService DisplayFormat
+@model HVK_Queen.Models.Owner
+
+<main>
+    <div id="ownerDetails">
+        <div class="ownerDetailsSection">
+            <h3>Personal Details</h3>
+            <div class="ownerDetailsGrid">
+                <div class="ownerDetailsLabel">First Name:</div><div class="ownerDetailsOutput">@Model.FirstName</div>
+                <div class="ownerDetailsLabel">Last Name:</div><div class="ownerDetailsOutput">@Model.LastName</div>
+                <div class="ownerDetailsLabel">Email:</div><div class="ownerDetailsOutput">@Model.Email</div>
+                <div class="ownerDetailsLabel">Phone Number:</div><div class="ownerDetailsOutput">@DisplayFormat.PhoneFormat(@Model.Phone)</div>
+                <div class="ownerDetailsLabel">Cell Phone Number:</div><div class="ownerDetailsOutput">@DisplayFormat.PhoneFormat(@Model.CellPhone)</div>
+            </div>
+        </div>
+        <div class="ownerDetailsSection">
+            <h3>Address</h3>
+            <div class="ownerDetailsGrid">
+                <div class="ownerDetailsLabel">Address:</div><div class="ownerDetailsOutput">@Model.Street</div>
+                <div class="ownerDetailsLabel">City:</div><div class="ownerDetailsOutput">@Model.City</div>
+                <div class="ownerDetailsLabel">Province:</div><div class="ownerDetailsOutput">@DisplayFormat.DisplayProvince(@Model.Province)</div>
+                <div class="ownerDetailsLabel">Postal Code:</div><div class="ownerDetailsOutput">@DisplayFormat.DisplayPostalCode(@Model.PostalCode)</div>
+            </div>
+        </div>
+        <div class="ownerDetailsSection">
+            <h3>Veterinarian Information</h3>
+            <div class="ownerDetailsGrid">
+                <div class="ownerDetailsLabel">Name:</div><div class="ownerDetailsOutput">@Model.Veterinarian.Name</div>
+                <div class="ownerDetailsLabel">Phone Number:</div><div class="ownerDetailsOutput">@DisplayFormat.PhoneFormat(@Model.Veterinarian.Phone)</div>
+                <div class="ownerDetailsLabel">Address:</div><div class="ownerDetailsOutput">@Model.Veterinarian.Street</div>
+                <div class="ownerDetailsLabel">City:</div><div class="ownerDetailsOutput">@Model.Veterinarian.City</div>
+                <div class="ownerDetailsLabel">Province:</div><div class="ownerDetailsOutput">@DisplayFormat.DisplayProvince(@Model.Veterinarian.Province)</div>
+                <div class="ownerDetailsLabel">Postal Code:</div><div class="ownerDetailsOutput">@DisplayFormat.DisplayPostalCode(@Model.Veterinarian.PostalCode)</div>
+            </div>
+        </div>
+        <div class="ownerDetailsSection">
+            <h3>Emergency Contact</h3>
+            <div class="ownerDetailsGrid">
+                <div class="ownerDetailsLabel">First Name:</div><div class="ownerDetailsOutput">@Model.EmergencyContactFirstName</div>
+                <div class="ownerDetailsLabel">Last Name:</div><div class="ownerDetailsOutput">@Model.EmergencyContactLastName</div>
+                <div class="ownerDetailsLabel">Phone Number:</div><div class="ownerDetailsOutput">@DisplayFormat.PhoneFormat(@Model.EmergencyContactPhone)</div>
+            </div>
+        </div>
+        <div><a class="btn btn-success" href="@Url.Action("Index", "Owner")">Back</a></div>
+    </div>
+</main>

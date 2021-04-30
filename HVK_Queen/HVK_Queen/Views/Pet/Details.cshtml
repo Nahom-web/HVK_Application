@@ -1,0 +1,86 @@
+﻿@inject HVK_Queen.Models.FormattingService DisplayFormat
+@model HVK_Queen.Models.Pet
+
+@{
+    ViewData["Title"] = "Details";
+}
+<main class="petMain">
+    <h3>Pet Details</h3>
+    <dl class="petdetail">
+        <dt class="petdetailleft">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="petdetailleft">
+            @Html.DisplayNameFor(model => model.Breed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Breed)
+        </dd>
+        <dt class="petdetailleft">
+            @Html.DisplayNameFor(model => model.Birthdate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Birthdate)
+        </dd>
+        <dt class="petdetailleft">
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+        <dd class="col-sm-10">
+            @DisplayFormat.GenderFormat(Model.Gender)
+        </dd>
+        <dt class="petdetailleft">
+            @Html.DisplayNameFor(model => model.DogSize)
+        </dt>
+        <dd class="col-sm-10">
+            @DisplayFormat.DogSizeFormat(Model.DogSize)
+        </dd>
+        <dt class="petdetailleft">
+            @Html.DisplayNameFor(model => model.Fixed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Fixed)
+        </dd>
+        <dt class="petdetailleft">
+            @Html.DisplayNameFor(model => model.Climber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Climber)
+        </dd>
+        <dt class="petdetailleft">
+            @Html.DisplayNameFor(model => model.Barker)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Barker)
+        </dd>
+        <dt class="petdetailleft">
+            @Html.DisplayNameFor(model => model.PetVaccination)
+        </dt>
+        <dd class="col-sm-10">
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td>Expiry Date</td>
+                </tr>
+                @foreach (var vaccination in Model.PetVaccination) {
+                    <tr>
+                        <td>@vaccination.Vaccination.Name</td>
+                        <td>@vaccination.ExpiryDate.ToString("yyyy\\/MM\\/dd")</td>
+                    </tr>
+                }
+            </table>
+        </dd>
+        <dt class="petdetailleft">
+            @Html.DisplayNameFor(model => model.SpecialNotes)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SpecialNotes.Notes)
+        </dd>
+    </dl>
+    <div class="detailsGrid">
+        <div class="textlabel"></div>
+        <div><a class="btn btn-success viewInfo" href="@Url.Action("Index", "Owner")">Back</a></div>
+    </div>
+</main>

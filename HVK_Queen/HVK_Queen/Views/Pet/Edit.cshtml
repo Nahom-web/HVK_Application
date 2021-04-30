@@ -1,0 +1,113 @@
+﻿@model HVK_Queen.Models.Pet
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<main class="petMain">
+    <h3>Update Pet</h3>
+    <fieldset>
+        <form asp-action="Edit">
+            <div class="formcontainer">
+                <div class="textlabel" id="iddisplay">
+                    <label asp-for="OwnerId"></label>
+                </div>
+                <div id="iddisplay">
+                    <input asp-for="OwnerId" />
+                </div>
+                <div class="textlabel" id="iddisplay">
+                    <label asp-for="PetId"></label>
+                </div>
+                <div id="iddisplay">
+                    <input asp-for="PetId" />
+                </div>
+                <div class="textlabel">
+                    <label asp-for="Name"></label>
+                </div>
+                <div>
+                    <input asp-for="Name" /><span asp-validation-for="Name"></span>
+                </div>
+                <div class="textlabel">
+                    <label asp-for="Breed"></label>
+                </div>
+                <div>
+                    <input asp-for="Breed" /><span asp-validation-for="Breed"></span>
+                </div>
+                <div class="textlabel">
+                    <label asp-for="Birthdate"></label>
+                </div>
+                <div>
+                    <input asp-for="Birthdate" /><span asp-validation-for="Birthdate"></span>
+                </div>
+                <div class="textlabel">
+                    <label asp-for="Gender"></label>
+                </div>
+                <div>
+                    @foreach (var gender in Enum.GetValues(typeof(Pet.Genders)).OfType<Pet.Genders>()) {
+                        <input asp-for="Gender" type="radio" id="@gender" value="@gender" checked="@(ViewBag.Gender == gender.ToString())" />
+                        <label for="@gender">@gender</label>
+                    }
+                    <span asp-validation-for="Gender"></span>
+                </div>
+                <div class="textlabel"><label asp-for="DogSize"></label></div>
+                <div>
+                    @foreach (var size in Enum.GetValues(typeof(Pet.Size))) {
+                        <input asp-for="DogSize" type="radio" id="@size" value="@size" checked="@(ViewBag.DogSize == size.ToString())" />
+                        <label for="@size">@size</label>
+                    }
+                    <span asp-validation-for="DogSize"></span>
+                </div>
+                <div class="textlabel"><label asp-for="Fixed"></label></div>
+                <div>
+                    <input asp-for="Fixed" /><span asp-validation-for="Fixed"></span>
+                </div>
+                <div class="textlabel"><label asp-for="Climber"></label></div>
+                <div>
+                    <input asp-for="Climber" /><span asp-validation-for="Climber"></span>
+                </div>
+                <div class="textlabel"><label asp-for="Barker"></label></div>
+                <div>
+                    <input asp-for="Barker" /><span asp-validation-for="Barker"></span>
+                </div>
+                <div class="textlabel">
+                    <label asp-for="PetVaccination"></label>
+                </div>
+                <div>
+                    <table>
+                        <tr><td>Name</td><td>Expiry Date</td></tr>
+                        @for (int i = 0; i < ViewBag.petVaccinations.Length; i++) {
+                            if (ViewBag.petVaccinations[i] != null) {
+                                <tr>
+                                    <td>@ViewBag.petVaccinations[i].Name</td>
+                                    <td><input type="date" name="PetVaccination" value=@ViewBag.petVaccinations[i].ExpiryDate /></td>
+                                    <td><input name="VaccinationName" value=@ViewBag.VaccinationId[i].Name hidden /></td>
+                                </tr>
+                            } else {
+                                <tr>
+                                    <td>@ViewBag.VaccinationId[i].Name</td>
+                                    <td><input type="date" name="PetVaccination" /></td>
+                                    <td><input name="VaccinationName" value=@ViewBag.VaccinationId[i].Name hidden /></td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                    <span asp-validation-for="PetVaccination"></span>
+                </div>
+                <div class="textlabel">
+                    <label asp-for="SpecialNotes.Notes"></label>
+                </div>
+                <div>
+                    <textarea asp-for="SpecialNotes.Notes"></textarea><span asp-validation-for="SpecialNotes.Notes"></span>
+                </div>
+            </div>
+            <div class="detailsGrid">
+                <div class="textlabel">
+                    <input class="btn btn-success viewInfo" type="submit" value="Update Pet" />
+                </div>
+                <div>
+                    <a class="btn btn-success viewInfo" href="@Url.Action("Index", "Owner")">Cancel</a>
+                </div>
+            </div>
+
+        </form>
+    </fieldset>
+</main>

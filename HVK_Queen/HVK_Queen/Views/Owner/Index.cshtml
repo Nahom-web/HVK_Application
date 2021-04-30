@@ -1,0 +1,114 @@
+﻿@inject HVK_Queen.Models.FormattingService DisplayFormat
+
+@model HVK_Queen.Models.Owner
+
+@if (ViewBag.CannotDeleteAccountMessage != null) {
+    <div class="alert alert-danger text-center UnsuccessfulMessageDiv">
+        <p>@ViewBag.CannotDeleteAccountMessage</p>
+    </div>
+}
+
+<main id="OwnerHomePageMain">
+
+    <div id="personalInformationDiv">
+        <h2>Personal Information</h2>
+        @await Html.PartialAsync("_OwnersInformation")
+        <a data-toggle="tooltip" data-placement="left" title="Update or Edit your Account Information" href="@Url.Action("Edit", "Owner", new { id = Model.OwnerId })" class="ownerHomePageEditAndViewLinks"><img src="~/Images/pencil.svg" alt="edit acount information icon" id="editAccount" /></a>
+        <a data-toggle="tooltip" data-placement="right" title="View your Account Information" href="@Url.Action("Details", "Owner", new { id = Model.OwnerId  })" class="ownerHomePageEditAndViewLinks"><img src="~/Images/eye.svg" alt="details Owner icon" data-placement="right" id="ViewAccount" /></a>
+    </div>
+
+    <div id="petSummaryDiv">
+        <h2>Pet Summary</h2>
+        <table class="table table-light table-striped" id="PetSummaryTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Breed</th>
+                    <th>Vaccination Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ decimal currentPet = 0; }
+                @if (Model.Pet.Count != 0) {
+                    @foreach (var pet in Model.Pet) {
+                        @if (pet.PetId != currentPet) {
+                            currentPet = pet.PetId;
+                            <tr>
+                                <td>@pet.Name</td>
+                                <td>@pet.Breed</td>
+                                <td>
+                                    @if (pet.PetVaccination.Count() == 6) {
+                                        <span>Fully Vaccinated</span>
+                                        <img src="~/Images/goodVaccination.svg" alt="Fully Vaccinated Icon" id="goodVaccinationIcon" />
+                                    } else {
+                                        <span>Missing Vaccinations</span>
+                                        <img src="~/Images/missingVaccination.svg" alt="Missing Vaccinated Icon" id="missingVaccinationIcon" />
+                                    }
+                                </td>
+                                <td id="petActions">
+                                    <a data-toggle="tooltip" data-placement="left" title="Update this pet" href="@Url.Action("Edit", "Pet", new { id = currentPet })"><img src="~/Images/pencil.svg" alt="update reservation icon" id="editRes" data-toggle="tooltip" data-placement="right" title="Update Pet" /></a>
+                                    <a data-toggle="tooltip" data-placement="top" title="See this pets details" href="@Url.Action("Details", "Pet", new { id = currentPet })"><img src="~/Images/eye.svg" alt="details pet icon" data-toggle="tooltip" data-placement="right" title="Pet Details" /></a>
+                                    <a data-toggle="tooltip" data-placement="right" title="Remove this pet" href="@Url.Action("Delete", "Pet", new { id = currentPet })"><img src="~/Images/trash.svg" alt="remove pet icon" data-toggle="tooltip" data-placement="right" title="Remove Pet" /></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                } else {
+                    <tr>
+                        <td colspan="4">No Pets Created</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div id="upcomingReservationDiv">
+        @Html.ActionLink("Add Reservation", "Create", "Reservation", null, new { title = "Add A Reservation", @class = "actionLinks", @id = "newReservationButton" })
+        <br />
+        <br />
+        <h2>Upcoming Reservations</h2>
+        <table class="table table-light table-striped">
+            <thead>
+                <tr>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Pet Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (ViewBag.OwnersReservations.Count != 0) {
+                    @foreach (var res in ViewBag.OwnersReservations) {
+                        <tr>
+                            <td>@DisplayFormat.DateFormat(res.StartDate)</td>
+                            <td>@DisplayFormat.DateFormat(res.EndDate)</td>
+                            <td class="pets">
+                                @{ int petId = 0;}
+                                @foreach (var x in res.PetReservation) {
+                                    petId = x.Pet.PetId;
+                                }
+                                @foreach (var x in res.PetReservation) {
+                                    if (x.Pet.PetId != petId) {
+                                        <span>@x.Pet.Name, </span>
+                                    } else {
+                                        <span>@x.Pet.Name</span>
+                                    }
+                                }
+                            </td>
+                            <td id="reservationActions">
+                                <a data-toggle="tooltip" data-placement="left" title="Update this reservation" href="@Url.Action("Edit", "Reservation", new { id = res.ReservationId })"><img src="~/Images/pencil.svg" alt="edit reservation icon" id="editRes" data-toggle="tooltip" data-placement="right" title="Edit Reservation" /></a>
+                                <a data-toggle="tooltip" data-placement="top" title="See reservation details" href="@Url.Action("Details", "Reservation", new { id = res.ReservationId })"><img src="~/Images/eye.svg" alt="reservation details icon" data-toggle="tooltip" data-placement="right" title="Reservation Details" /></a>
+                                <a data-toggle="tooltip" data-placement="right" title="Delete this reservation" href="@Url.Action("Delete", "Reservation", new { id = res.ReservationId })"><img src="~/Images/trash.svg" alt="delete reservation icon" data-toggle="tooltip" data-placement="right" title="Delete Reservation" /></a>
+                            </td>
+                        </tr>
+                    }
+                } else {
+                    <tr>
+                        <td colspan="4">No Reservstions Created</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</main>

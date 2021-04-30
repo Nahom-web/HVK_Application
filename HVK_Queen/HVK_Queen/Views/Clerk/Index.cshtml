@@ -1,0 +1,175 @@
+﻿@inject HVK_Queen.Models.FormattingService DisplayFormat
+
+@model HVK_Queen.Models.Reservation
+
+@{
+    Layout = "_ClerkLayout";
+}
+
+<main>
+    <form asp-action="Index" asp-controller="Clerk" id="searchForm">
+        <div class="input-group mb-3 search">
+            <input name="NameOrPhoneNumber" class="form-control col-xs-12" id="inpCustomer" placeholder="Search by customer name or phone #" size="20"
+                   type="text" />
+            <input type="submit" class="btn btn-success" value="Search" id="searchCustomer" data-toggle="tooltip" data-placement="top" title="Search for a customer" />
+        </div>
+    </form>
+
+    <br />
+    <div id="reservations">
+        <h2 class="text-center">Reservations</h2>
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-startingToday-tab" data-toggle="tab" href="#nav-statingToday" role="tab" aria-controls="nav-statingToday" aria-selected="true">Starting Today</a>
+                <a class="nav-item nav-link" id="nav-endingToday-tab" data-toggle="tab" href="#nav-endingToday" role="tab" aria-controls="nav-endingToday" aria-selected="false">Ending Today</a>
+                <a class="nav-item nav-link" id="nav-ongoing-tab" data-toggle="tab" href="#nav-ongoing" role="tab" aria-controls="nav-ongoing" aria-selected="false">Ongoing</a>
+                <a class="nav-item nav-link" id="nav-future-tab" data-toggle="tab" href="#nav-future" role="tab" aria-controls="nav-future" aria-selected="false">Future</a>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-statingToday" role="tabpanel" aria-labelledby="nav-startingToday-tab">
+                <span>@ViewBag.StartingReservations.Count Reservations</span>
+                <table class="table table-striped ResTables text-center" id="startingReservationsTable">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Owner Name</th>
+                            <th class="pets">Pet Name(s)</th>
+                            <th>Vaccination</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (ViewBag.StartingReservations.Count != 0) {
+                            @foreach (var res in ViewBag.StartingReservations) {
+                                <tr class="data">
+
+                                    @await Html.PartialAsync("_ReservationGeneralInformation", (Reservation)res)
+
+                                    <td>
+                                        @{ bool fullyVaccinated = true;}
+                                        @foreach (var petRes in res.PetReservation) {
+                                            @if (petRes.Pet.PetVaccination.Count == 6) {
+                                                @foreach (var petVac in petRes.Pet.PetVaccination) {
+                                                    fullyVaccinated = petVac.VaccinationChecked;
+                                                }
+                                            } else {
+                                                fullyVaccinated = false;
+                                            }
+                                        }
+                                        @if (fullyVaccinated) {
+                                            <span>Fully Vaccinated</span>
+                                            <img src="~/Images/goodVaccination.svg" alt="Fully Vaccinated Icon" id="goodVaccinationIcon" />
+                                            @*Source: https://freeicons.io/regular-life-icons/sign-check-icon-17888*@
+                                        } else {
+                                            <span>Missing Vaccinations</span>
+                                            <img src="~/Images/missingVaccination.svg" alt="Missing Vaccinated Icon" id="missingVaccinationIcon" />
+                                            @*Source: https://freeicons.io/regular-life-icons/sign-check-icon-17888*@
+                                        }
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-success text-center" data-toggle="tooltip" data-placement="bottom" title="Start the pet visit" href="@Url.Action("StartPetVisit", "Clerk", new { id = res.ReservationId })">Start</a>
+                                    </td>
+                                </tr>
+                            }
+                        } else {
+                            <tr>
+                                <td colspan="4">No Reservations Listed</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div class="tab-pane fade" id="nav-endingToday" role="tabpanel" aria-labelledby="nav-endingToday-tab">
+                <span>@ViewBag.EndingReservations.Count Reservations</span>
+                <table class="table table-striped ResTables text-center" id="EndingReservationsTable">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Owner Name</th>
+                            <th class="pets">Pet Name(s)</th>
+                            <th>End Pet Visit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (ViewBag.EndingReservations.Count != 0) {
+                            @foreach (var res in ViewBag.EndingReservations) {
+                                <tr class="data">
+                                    @await Html.PartialAsync("_ReservationGeneralInformation", (Reservation)res)
+                                    <td>
+                                        <a class="btn btn-danger text-center" data-toggle="tooltip" data-placement="bottom" title="End the pet visit" href="@Url.Action("EndPetVisit", "Clerk", new { id = res.ReservationId })">End</a>
+                                    </td>
+                                </tr>
+                            }
+                        } else {
+                            <tr>
+                                <td colspan="4">No Reservations Listed</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="tab-pane fade" id="nav-ongoing" role="tabpanel" aria-labelledby="nav-ongoing-tab">
+                <span>@ViewBag.OngoingReservations.Count Reservations</span>
+                <table class="table table-striped ResTables text-center" id="OngoingReservationsTable">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Owner Name</th>
+                            <th>Pet Name(s)</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (ViewBag.OngoingReservations.Count != 0) {
+                            @foreach (var res in ViewBag.OngoingReservations) {
+                                <tr class="data">
+                                    @await Html.PartialAsync("_ReservationsDetailed", (Reservation)res)
+                                    <td>
+                                        <a class="btn btn-danger text-center" data-toggle="tooltip" data-placement="bottom" title="End the pet visit" id="endPetVisitBtn" href="@Url.Action("EndPetVisit", "Clerk", new { id = res.ReservationId })">End</a>
+                                    </td>
+                                </tr>
+                            }
+                        } else {
+                            <tr>
+                                <td colspan="4">No Reservations Listed</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tab-pane fade" id="nav-future" role="tabpanel" aria-labelledby="nav-future-tab">
+                <span>@ViewBag.FutureReservations.Count Reservations</span>
+                <table class="table table-striped ResTables text-center" id="FutureReservationsTable">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Owner Name</th>
+                            <th class="pets">Pet Name(s)</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (ViewBag.FutureReservations.Count != 0) {
+                            @foreach (var res in ViewBag.FutureReservations) {
+                                <tr class="data">
+                                    @await Html.PartialAsync("_ReservationsDetailed", (Reservation)res)
+                                </tr>
+                            }
+                        } else {
+                            <tr>
+                                <td colspan="4">No Reservations Listed</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>

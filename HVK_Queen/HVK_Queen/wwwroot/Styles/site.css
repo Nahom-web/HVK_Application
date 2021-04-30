@@ -1,0 +1,1206 @@
+﻿body {
+    background-color: #ffecd7;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.underlinedText {
+    text-decoration: underline;
+}
+
+#navbarNav {
+    text-align: center;
+}
+
+#headerLogo {
+    width: 3em;
+}
+
+#name {
+    margin-left: auto;
+    color: black;
+    padding-right: .5em;
+    margin-right: .4em;
+}
+
+#nameIcon {
+    padding: 0 .6em .1em 0;
+}
+
+#container {
+    position: relative;
+    min-height: 100vh;
+}
+
+#content {
+    margin-top: 1.5em;
+    padding-bottom: 2.5em;
+}
+
+.NavBtns {
+    font-size: 1.2em;
+    width: max-content;
+    padding: .5em;
+    margin-left: .5em;
+}
+
+
+/*Error Messages*/
+
+.field-validation-error,
+.summary-message,
+.field-validation-valid{
+    color: red;
+    font-style: italic;
+    justify-self: start;
+}
+
+.input-validation-error {
+    border: 1px solid red;
+}
+
+
+/*Login Page*/
+
+#loginNav {
+    text-align: center;
+}
+
+#loginTitle {
+    text-align: center;
+    color: purple;
+}
+
+.headerLogo {
+    width: 30%;
+}
+
+#loginHeaderTitle {
+    color: purple;
+}
+
+#emailFld,
+#pass {
+    height: 2em;
+}
+
+
+/*Login Form*/
+
+#loginMain {
+    margin-top: 3em;
+}
+
+#aroundLoginForm,
+#personalInformationDiv,
+#upcomingReservationDiv,
+#petSummaryDiv,
+.addOwnerField,
+.InfoWrapper,
+.InfoGridFieldset,
+.ResInfo {
+    opacity: 0.7;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.75);
+    background: pink;
+    border-color: #000000;
+    border-width: 1px;
+    border-style: solid;
+}
+
+#aroundLoginForm {
+    height: auto;
+    padding: 8px 8px 8px 8px;
+    margin: auto;
+    width: 90%;
+}
+
+#loginForm input[type="text"] {
+    width: 100%;
+    padding: .4em;
+}
+
+#loginForm input[type="submit"] {
+    margin-top: .6em;
+}
+
+#loginEmail,
+#loginPassword {
+    padding: .4em 0 .4em 0;
+    margin-bottom: .5em;
+}
+
+#signUpLink {
+    vertical-align: middle;
+    text-decoration: none;
+    padding: .5em 0 0 1em;
+}
+
+
+/*Manage Owner*/
+
+#ownerDetails {
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.ownerDetailsSection {
+    opacity: 0.7;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.75);
+    background: pink;
+    border-color: #000000;
+    border-width: 1px;
+    border-style: solid;
+    margin-bottom: 20px;
+}
+
+.ownerDetailsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1em;
+    margin: 30px auto;
+}
+
+.ownerDetailsLabel {
+    justify-self: end;
+    font-weight: bold;
+}
+
+.ownerDetailsOutput,
+#addOwnerForm input {
+    justify-self: start;
+}
+
+#addOwnerForm {
+    text-align: center;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin: 30px auto;
+}
+
+.addOwnerGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1em;
+    margin: 40px auto;
+    padding: .5em;
+}
+
+#addOwnerForm label,
+#addOwnerForm select {
+    justify-self: start;
+}
+
+#addOwnerForm input[type=text],
+#addOwnerForm input[type=tel],
+#addOwnerForm input[type=email],
+#addOwnerForm select {
+    width: 100%;
+}
+
+#addOwnerForm .field-validation-error {
+    text-align: left;
+}
+
+.addOwnerField legend {
+    padding-top: 3em;
+    font-size: 2em;
+}
+
+
+/*Delete Owner Styles*/
+
+#backToHomeLink {
+    text-align: center;
+}
+
+#deleteOwnerDiv {
+    margin: 1em;
+    width: 90%;
+}
+
+#deleteOwnerDiv p {
+    font-size: .8em;
+}
+
+.UnsuccessfulMessageDiv {
+    width: 100%;
+    font-size: .6em;
+}
+
+
+/* Owner Home Page */
+
+.ownerHomePageEditAndViewLinks{
+    padding-right: 2em;
+}
+
+#editAccount,
+#ViewAccount {
+    width: 1.6em;
+}
+
+#successfulMessageDiv {
+    display: none;
+}
+
+#OwnerHomePageMain {
+    display: grid;
+    grid-template-columns: 12fr;
+    justify-content: center;
+    justify-items: center;
+    grid-gap: 1em;
+    margin: .4em;
+    text-align: center;
+    padding: 1em;
+}
+
+#personalInformationDiv,
+#upcomingReservationDiv,
+#petSummaryDiv {
+    width: 100%;
+    padding: 1em;
+
+}
+
+#personalInformationDiv .info,
+#upcomingReservationDiv table,
+#petSummaryDiv table{
+    font-size: 1.1em;
+}
+
+#petSummaryDiv {
+    width: 100%
+}
+
+#personalInformationDiv #viewAccuntInfoBtn,
+#upcomingReservationDiv #createReservationBtn,
+#petSummaryDiv #addPetBtn {
+    width: max-content;
+    height: 32px;
+    padding: 0px 10px 0px 10px;
+    background: #d4e3fc;
+    color: #232323;
+    border-color: #232323;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 3px 3px 3px 3px;
+    font-family: "Helvetica";
+    font-weight: 400;
+    font-size: 18px;
+    text-align: center;
+}
+
+#personalInformationDiv .info,
+#ownerInformation .info,
+#ownerInformation #emergencyContactInfo,
+#infoRight .info {
+    display: grid;
+    margin-bottom: 1.3em;
+}
+
+#personalInformationDiv .info,
+#ownerInformation .info,
+#ownerInformation #emergencyContactInfo {
+    grid-template-columns: auto auto;
+}
+
+#personalInformationDiv .info {
+    grid-gap: .7em;
+    margin-top: 1.2em;
+}
+
+#ownerInformation .info,
+#ownerInformation #emergencyContactInfo {
+    margin-top: .5em;
+}
+
+#ownerInformation .info {
+    grid-gap: .5em;
+}
+
+#ownerInformation #emergencyContactInfo {
+    grid-gap: .3em;
+    padding-bottom: 3em;
+}
+
+#personalInformationDiv .info .infoLabel,
+#ownerInformation .info .infoLabel,
+#ownerInformation #emergencyContactInfo .infoLabel {
+    text-align: right;
+    font-weight: bold;
+    margin-left: 2.5em;
+}
+
+#personalInformationDiv .info .infoValue,
+#ownerInformation .info .infoValue,
+#ownerInformation #emergencyContactInfo .infoValue {
+    text-align: left;
+}
+
+#ownerHomePageReservations {
+    display: grid;
+    grid-template-columns: auto auto;
+    background-color: white;
+    margin-bottom: 1em;
+    align-items: center;
+    padding: .5em;
+}
+
+#ownerHomePageReservations #reservation {
+    margin: auto;
+    float: left;
+    padding-right: 9em;
+}
+
+#ownerHomePageReservations a img {
+    float: right;
+    padding-right: .6em;
+}
+
+#ownerHomePageReservations #reservations,
+#ownerHomePageReservations a img {
+    vertical-align: middle;
+}
+
+#goodVaccinationIcon,
+#missingVaccinationIcon {
+    width: 1em;
+}
+
+#actionIcons img {
+    padding-right: .7em;
+}
+
+.actionLinks {
+    width: max-content;
+    height: 32px;
+    padding: 4px 10px 4px 10px;
+    background: #d4e3fc;
+    color: #232323;
+    border-color: #232323;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 3px 3px 3px 3px;
+    font-weight: 400;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+}
+
+#reservationActions a,
+#petActions a {
+    padding: .2em;
+}
+
+#newReservationButton{
+    padding: .5em;
+    margin-bottom: .5em;
+}
+
+
+/* Clerk Home Page*/
+
+.search {
+    width: 100%;
+    height: 2em;
+    margin: auto;
+}
+
+button#searchCustomer {
+    border-radius: 3px;
+    background-color: #008060;
+    color: white;
+    min-width: 5em;
+    max-width: 6em;
+}
+
+button#searchCustomer:hover {
+    background-color: darkgreen;
+}
+
+#inpCustomer,
+#searchCustomer {
+    height: 2em;
+}
+
+#reservations {
+    padding: 8px 8px 8px 8px;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.75);
+    background: pink;
+    border-color: #000000;
+    border-width: 1px;
+    border-style: solid;
+    margin-top: 2em;
+}
+
+.ResTables tbody td {
+    padding: .8em;
+    vertical-align: top;
+}
+
+#myTabContent {
+    background: whitesmoke !important;
+}
+
+.data td {
+    vertical-align: middle;
+}
+
+#endPetVisitBtn {
+    font-size: 1.4em;
+}
+
+#startingReservationsTable td,
+#OngoingReservationsTable td {
+    vertical-align: middle;
+}
+
+
+/*Start Pet Visit View*/
+
+.ResInfo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: .4em;
+    text-align: center;
+}
+
+.ResInfo .key {
+    text-align: left;
+    font-weight: bold;
+}
+
+.ResInfo .value {
+    text-align: left;
+}
+
+.reservationInformationTitle,
+.petsTitle,
+.petsDiv h3 {
+    color: #0c59cf;
+    text-align: center;
+}
+
+.petsDiv {
+    margin: auto;
+    width: 100%;
+}
+
+.petsDiv h4 {
+    text-align: center;
+}
+
+.petsTable {
+    padding: 1em;
+    background-color: white;
+    margin-bottom: 2em;
+}
+
+.petsTable thead {
+    background-color: #c0c0c0;
+    text-align: center;
+}
+
+.petsTable td {
+    vertical-align: top;
+}
+
+#vaccinationsBox {
+    width: 17em;
+}
+
+.petsTable td {
+    font-size: .8em;
+}
+
+.petTd {
+    font-size: 1em;
+}
+
+#medicationSummary {
+    text-align: left;
+}
+
+.medicationKey {
+    font-weight: bold;
+}
+
+#medicationBox {
+    width: 16em;
+}
+
+#vaccinationList {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1em;
+}
+
+#vaccinationList div {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+#vaccinationList #name {
+    text-align: right;
+}
+
+#vaccinationList #vaccination {
+    text-align: left;
+    width: max-content;
+}
+
+
+/*Contract*/
+
+.contractcontainer,
+.invoiceContainer {
+    margin: 0 auto;
+    /*    text-align: center;*/
+    background-color: white;
+    width: 90%;
+}
+
+.contractdetail,
+.invoicedetail {
+    border: 1px solid black;
+    max-width: 100%;
+    margin: 0 auto;
+    /*    text-align: right;*/
+}
+
+.contractdetail #date {
+    padding-right: .6em;
+}
+
+.invoicedetail {
+    text-align: center;
+}
+
+.tablestyle {
+    margin: 0 auto;
+    text-align: center;
+    background-color: white;
+}
+
+#aroundOwnerInformation,
+#reservationDurationDiv,
+#allPetsSummary {
+    padding: .4em;
+}
+
+#ownerInformation,
+#ownerInformation #ownerTitle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#ownerInformation,
+#reservationDuration,
+#allPetsSummary .singlePetSummary .petDetails,
+#allPetsSummary .singlePetSummary .services,
+#allPetsSummary .singlePetSummary .dailyRate {
+    padding: .7em;
+    border: 1px solid black;
+}
+
+#ownerInformation #ownerTitle {
+    grid-column: 1 / span 2;
+}
+
+#ownerInformation .ownersDetails {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    font-size: .8em;
+    padding-left: 2em;
+    padding-top: .5em;
+}
+
+
+/*Reservation info*/
+
+#reservationDuration {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+#reservationDuration #reservationTitle {
+    grid-column: 1 / span 3;
+}
+
+#reservationDuration .date {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding-left: .5em;
+}
+
+
+/*Pets info*/
+
+#allPetsSummary {
+    display: grid;
+    grid-template-columns: auto;
+}
+
+#allPetsSummary .singlePetSummary {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+#allPetsSummary .singlePetSummary .petDetails {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+#allPetsSummary .singlePetSummary .petDetails div {
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+
+#allPetsSummary .singlePetSummary .petDetails .petName,
+#allPetsSummary .singlePetSummary .petDetails .petsDogSize,
+#allPetsSummary .singlePetSummary .services,
+#allPetsSummary .singlePetSummary .dailyRate,
+#termsAndConditions {
+    text-align: left;
+}
+
+#allPetsSummary .singlePetSummary .services,
+#allPetsSummary .singlePetSummary .dailyRate,
+#allPetsSummary .singlePetSummary .services #serviesList,
+#dailyRateCost {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+#allPetsSummary .singlePetSummary .petDetails #petTitle h5,
+#allPetsSummary .singlePetSummary .services #serviesTitle h5,
+#allPetsSummary .singlePetSummary .dailyRate #dailyRateTitle h5 {
+    border-bottom: 1px solid black;
+}
+
+#allPetsSummary .singlePetSummary .services #serviesList {
+    grid-gap: 1.3em;
+}
+
+#termsAndConditions {
+    font-size: .8em;
+    padding: .2em;
+}
+
+#signAndDate {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: .4em;
+}
+
+hr.line {
+    grid-column: 1 / 2 span;
+}
+
+hr {
+    border: 1px solid black;
+    opacity: .9;
+    width: 100%;
+}
+
+#printContractButtonDiv {
+    margin-top: 1em;
+}
+
+
+/*Invoice*/
+
+.invoicetable {
+    text-align: right;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.invoiceContainer {
+    padding: 1em;
+    border: 2px solid darkblue;
+    background-color: white;
+}
+
+.invoiceContainer .head,
+.invoiceContainer .invoiceInfo,
+#invoiceMessageWithPicture {
+    display: grid;
+    grid-template-columns: 3fr 9fr;
+}
+
+.invoiceContainer .head h2 {
+    color: #4F81BD;
+    font-family: 'Book Antiqua';
+    letter-spacing: 1px;
+    font-size: 2.2em;
+    padding-left: .6em;
+}
+
+.invoiceContainer .head p,
+.invoiceContainer .invoiceInfo #infoLeft p,
+.invoiceContainer .invoiceInfo #infoRight .info,
+.invoiceContainer .details {
+    font-family: Verdana;
+    font-size: .7em;
+    padding: 2em;
+}
+
+.invoiceContainer .head p,
+.invoiceContainer .invoiceInfo #infoLeft p,
+.invoiceContainer .invoiceInfo #infoRight .info {
+    padding: 2em;
+}
+
+.invoiceContainer .head p {
+    text-align: right;
+    vertical-align: central;
+}
+
+.invoiceContainer .invoiceInfo #infoLeft p {
+    text-align: left;
+}
+
+.invoiceContainer .invoiceInfo #infoRight .info {
+    text-align: right;
+}
+
+.details .description {
+    text-align: left;
+}
+
+.details .rate,
+.details .numberOfDays,
+.details .itemTotal,
+.details .calculationSummary,
+.details .result {
+    text-align: right;
+}
+
+.details .calculationSummary {
+    font-weight: bold;
+    border: none;
+}
+
+.details table {
+    padding: .5em;
+}
+
+#printButtonDiv {
+    margin-top: 2em;
+}
+
+#invoiceMessageWithPicture img {
+    width: 14em;
+    padding-right: 2em;
+}
+
+#invoiceMessageWithPicture p {
+    color: #365F91;
+    font-weight: bold;
+    padding-top: 3em;
+}
+
+#infoRight .info {
+    grid-auto-columns: auto;
+}
+
+#infoRight .info .infoLabel {
+    display: none;
+}
+
+
+/*Manage Reservation*/
+
+.InfoWrapper {
+    width: 300px;
+    margin: 20px auto;
+}
+
+#InfoWrapperBtn {
+    width: 300px;
+    margin: 20px auto;
+}
+
+.center {
+    text-align: center;
+}
+
+.detailsGrid {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 10px;
+    margin: 5px;
+}
+
+.rightItem {
+    grid-column: 2 / 2
+}
+
+
+/*Reservation Forms*/
+
+.InfoGridFieldset {
+    width: 50%;
+    margin: 10px auto;
+    padding-bottom: 1rem;
+}
+
+.gridForm {
+    display: grid;
+    grid-template-columns: 120px auto auto;
+    grid-gap: 10px;
+}
+
+.gridForm>label {
+    grid-column: 1 / 2;
+    text-align: right;
+}
+
+.gridForm>input {
+    width: -moz-fit-content;
+    width: fit-content;
+    grid-column: 2 / 3;
+}
+
+.gridForm>button {
+    width: -moz-fit-content;
+    width: fit-content;
+    grid-column: 2 / 3;
+}
+
+.gridForm>select {
+    width: -moz-fit-content;
+    width: fit-content;
+    grid-column: 2 / 3;
+}
+
+
+/*Footer*/
+
+footer {
+    background-color: #ffdad8;
+}
+
+#footer-container {
+    display: grid;
+    grid-template-columns: auto;
+}
+
+#footerImage {
+    display: none;
+}
+
+#footer-nav {
+    width: 100%;
+}
+
+#footer-nav ul {
+    grid-template-columns: auto auto auto;
+}
+
+#footer-nav ul,
+#Clerk-footer-nav ul {
+    list-style-type: none;
+    text-align: center;
+}
+
+#Clerk-footer-nav ul {
+    grid-template-columns: auto;
+}
+
+#footer-nav ul li,
+#Clerk-footer-nav ul li {
+    padding-right: 1.5em;
+}
+
+#footer-nav ul li a,
+#Clerk-footer-nav ul li a {
+    text-decoration: none !important;
+}
+
+#container-footer-information {
+    display: grid;
+    grid-template-columns: auto;
+    justify-content: center;
+    justify-items: center;
+}
+
+#about,
+#contact,
+#ClerkAbout,
+#ClerkContact {
+    text-align: center;
+}
+
+#emailIcon,
+#phoneIcon {
+    width: 20px;
+    height: 20px;
+}
+
+.contactIcons, 
+#copyrightDiv,
+#copyright {
+    padding: .5em;
+}
+
+#copyrightDiv,
+#copyright {
+    text-align: center;
+}
+
+#copyright, 
+#footer-nav ul li,
+#Clerk-footer-nav ul li,
+#container-footer-information,
+#aboutDescription {
+    font-size: 1em;
+}
+
+
+/* Pet styles */
+
+.petMain h2,
+.petMain h3,
+.petMain .deleteform {
+    text-align: center;
+    margin: 20px auto;
+}
+
+.back-pet-home {
+    text-align: left;
+}
+
+.back-pet-home a {
+    text-decoration: none;
+    color: black;
+}
+
+.formcontainer,
+.petdetail {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 10px;
+    opacity: 70%;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.75);
+    background: pink;
+    border-color: #000000;
+    border-width: 1px;
+    border-style: solid;
+    height: auto;
+    padding: 8px 8px 8px 8px;
+    margin: auto;
+    width: 90%;
+}
+
+.textlabel,
+.petdetailleft {
+    text-align: right;
+    width: 100%;
+    padding-right: 5px;
+    font-weight: bold;
+}
+
+.buttoncss {
+    color: #fff;
+    background-color: #198754;
+    border-color: #198754;
+}
+
+#iddisplay {
+    display: none;
+}
+
+.pettable {
+    opacity: 70%;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.75);
+    background: pink;
+    border-color: #000000;
+    border-width: 1px;
+    border-style: solid;
+    height: auto;
+    padding: 8px 8px 8px 8px;
+    margin: auto;
+    width: 70%;
+    text-align: center;
+}
+
+.pettable a {
+    text-decoration: none;
+}
+
+@media all and (min-width: 768px) {
+    
+    .navbar{
+        line-height: 3em;
+    }
+    
+    .HVKLogo, .navbar-nav .nav-item{
+        font-size: 1.2em;
+    }
+
+    #name {
+        font-size: 1.3em;
+    }
+    /* Header */
+    header h1 {
+        font-size: 3em;
+    }
+    /* Login Form */
+    .headerLogo {
+        width: 5em;
+        height: 2em;
+        padding: .1em 1em .1em 1em;
+    }
+    .headerTitle {
+        font-size: 1.5em;
+    }
+    #aroundLoginForm {
+        width: 40%;
+        padding: 2em;
+    }
+    /* Owner Home Page */
+    #OwnerHomePageMain {
+        grid-template-columns: 6fr 6fr;
+        grid-row-gap: 2.5em;
+        text-align: center;
+    }
+    #personalInformationDiv {
+        grid-column-start: 1;
+        grid-column-end: 2;
+    }
+    #petSummaryDiv {
+        grid-column-start: 2;
+        grid-column-end: 5;
+    }
+    #upcomingReservationDiv {
+        grid-column-start: 1;
+        grid-column-end: 5;
+        width: 60%;
+    }
+    /* Clerk Home Page*/
+    #reservations {
+        margin: 2em 7em 3em 7em;
+    }
+    .search {
+        width: 24em;
+        float: right;
+        margin-right: 7em;
+    }
+    #inpCustomer,
+    #searchCustomer {
+        height: 2.3em;
+    }
+    /*Create Owner Page*/
+    #addOwnerForm {
+        width: 50%;
+    }
+    .addOwnerGrid {
+        grid-template-columns: 1fr 1.2fr 1fr;
+    }
+    #addOwnerForm label {
+        justify-self: end;
+    }
+    /*Delete Owner Styles*/
+    #deleteOwnerDiv {
+        margin: auto;
+        width: 50%;
+    }
+    #deleteOwnerDiv p {
+        font-size: .8em;
+    }
+    .UnsuccessfulMessageDiv {
+        font-size: 2em;
+    }
+    /*Start Pet Visit View*/
+    .petsDiv {
+        width: 80%;
+    }
+    .ResInfo {
+        margin: auto;
+        width: 40%;
+        padding: 1em;
+    }
+    #vaccinationList div {
+        grid-template-columns: 1fr 1fr;
+    }
+    /*Contract*/
+    .contractcontainer,
+    .invoiceContainer {
+        width: 60%;
+    }
+    /*Invoice*/
+    .invoiceContainer .head h2 {
+        padding-right: 1.3em;
+    }
+    /*Footer*/
+    #container-footer-information,
+    #footerImage {
+        display: inline;
+    }
+    #footer-container,
+    #footer-nav ul {
+        display: grid;
+        justify-content: center;
+        justify-items: center;
+    }
+    #footer-container {
+        grid-template-columns: auto 4fr 5fr;
+    }
+    #footerImage,
+    #footer-nav,
+    #container-footer-information,
+    #Clerk-footer-nav {
+        margin: auto;
+    }
+    #footerImage {
+        width: 60%;
+    }
+    #FooterLogo {
+        width: 200px;
+    }
+    #footer-nav ul,
+    #Clerk-footer-nav ul {
+        grid-template-columns: auto;
+    }
+    #footer-nav ul li,
+    #Clerk-footer-nav ul li {
+        padding-bottom: 1em;
+        font-size: 1em;
+    }
+    #container-footer-information {
+        justify-content: left;
+        justify-items: left;
+        font-size: 1.1em;
+    }
+    #about,
+    #contact {
+        text-align: left;
+    }
+    #aboutDescription {
+        font-size: .9em;
+    }
+    #ClerkFooter {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        justify-content: center;
+        justify-items: center;
+        padding: 1.4em;
+    }
+    #Clerk-footer-nav ul li {
+        padding-bottom: 3em;
+    }
+    #ClerkAbout,
+    #ClerkContact {
+        text-align: center;
+    }
+    /*pet styles*/
+    .formcontainer,
+    .petdetail {
+        width: 60%;
+    }
+}

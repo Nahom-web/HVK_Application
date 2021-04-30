@@ -1,0 +1,11 @@
+﻿@inject HVK_Queen.Models.FormattingService DisplayFormat
+@model HVK_Queen.Models.Reservation
+
+<td>@DisplayFormat.DateFormat(Model.StartDate)</td>
+<td>@DisplayFormat.DateFormat(Model.EndDate)</td>
+@await Html.PartialAsync("_ReservationGeneralInformation", Model)
+<td>
+    <a data-toggle="tooltip" data-placement="bottom" title="Go to reservation page" href="@Url.Action("Details", "Reservation", new { id = Model.ReservationId })">
+        <img src="~/Images/eye.svg" alt="Eye Icon" />
+    </a>
+</td>

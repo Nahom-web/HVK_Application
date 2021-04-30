@@ -1,0 +1,60 @@
+﻿@model IEnumerable<HVK_Queen.Models.JoinForReservations>
+
+@{
+    ViewData["Title"] = "Reservation Details";
+}
+
+<div>
+    <fieldset class="InfoWrapper">
+        <legend class="center">Reservation Information:</legend>
+        <dl class="detailsGrid">
+            <dt>Reservation Start Date:</dt>
+            <dd class="viewInfo">@string.Format("{0:yyyy\\/MM\\/dd}", Model.First().Reservation.StartDate)</dd>
+            <dt>Reservation End Date:</dt>
+            <dd class="viewInfo">@string.Format("{0:yyyy\\/MM\\/dd}", Model.First().Reservation.EndDate)</dd>
+        </dl>
+    </fieldset>
+    @foreach (var x in Model) {
+        <div>
+            <h3 class="center">@x.Pet.Name</h3>
+
+            <fieldset class="InfoWrapper">
+                <legend>Services</legend>
+                <div class="detailsGrid">
+                    @if (x.PetReservation.PetReservationService.Count != 0) {
+                        @foreach (var serv in x.PetReservation.PetReservationService) {
+                            <p class="rightItem">@serv.Service.ServiceDescription</p>
+                         }
+                    } else {
+                        <p>This pet has no Services.</p>
+                    }
+                </div>
+            </fieldset>
+
+            <fieldset class="InfoWrapper">
+                <legend>Medication</legend>
+                @if (x.PetReservation.Medications.Count != 0) {
+                    @foreach (var med in x.PetReservation.Medications) {
+                        <dl class="detailsGrid">
+                            <dt>Name:</dt>
+                            <dd class="viewInfo">@med.Name</dd>
+                            <dt>Dosage:</dt>
+                            <dd class="viewInfo">@med.Dosage</dd>
+                            <dt>End Date:</dt>
+                            <dd class="viewInfo">@med.EndDate</dd>
+                            <dt>Instructions:</dt>
+                            <dd class="viewInfo">@med.SpecialInstruct</dd>
+                        </dl>
+                     }
+                } else {
+                    <p>This pet has no Medication.</p>
+                }
+            </fieldset>
+        </div>
+     }
+
+    <div id="InfoWrapperBtn">
+        <a class="btn btn-success" href="@Url.Action("Edit", "Reservation", new { id = @Model.First().Reservation.ReservationId })"" title="Modify this reservation">Update Reservation</a>
+    </div>
+</div>
+

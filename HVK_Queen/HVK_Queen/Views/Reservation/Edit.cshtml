@@ -1,0 +1,36 @@
+﻿@model HVK_Queen.Models.Reservation
+
+@{
+    ViewData["Title"] = "Edit Reservation";
+}
+
+<main>
+    <form asp-action="Edit" asp-controller="Reservation">
+        <input asp-for="@Model.ReservationId" hidden />
+        @await Html.PartialAsync("_ReservationDates")
+
+        <ul class="nav nav-tabs center" id="myTab" role="tablist">
+            @foreach (var pet in ViewBag.OwnerPets) {
+                <li class="nav-item">
+                    <a class="nav-link" id="@pet.Name-tab" data-toggle="tab" href="#@pet.Name" role="tab" aria-controls="@pet.Name" aria-selected="false">@pet.Name</a>
+                </li>
+
+            }
+        </ul>
+        <div class="tab-content">
+            @foreach (var pet in ViewBag.OwnerPets) {
+                <div class="tab-pane fade" id="@pet.Name" role="tabpanel" aria-labelledby="@pet.Name-tab">
+                    @foreach (var petRes in Model.PetReservation) {
+                        @if (petRes.PetId == pet.PetId) {
+                            @await Html.PartialAsync("_ReservationPetServices", petRes)
+                        }
+                    }
+                </div>
+            }
+        </div>
+
+        <div id="InfoWrapperBtn" class="detailsGrid">
+            <input type="submit" value="Edit Reservation" class="btn btn-success viewInfo" />
+        </div>
+    </form>
+</main>

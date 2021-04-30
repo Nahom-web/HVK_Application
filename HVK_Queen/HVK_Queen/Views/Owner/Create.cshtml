@@ -1,0 +1,125 @@
+﻿@model HVK_Queen.Models.Owner
+
+@{
+    Layout = "_LoginLayout";
+}
+
+<main>
+    <form id="addOwnerForm" asp-action="Create" asp-controller="Owner">
+
+        <fieldset class="addOwnerField">
+            <legend>Personal Details</legend>
+            <div class="addOwnerGrid">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" placeholder="First Name">
+                <span asp-validation-for="FirstName"></span>
+
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" placeholder="Last Name">
+                <span asp-validation-for="LastName"></span>
+
+                <label asp-for="Email"></label>
+                <input asp-for="Email" placeholder="Email (name@gmail.com)">
+                <span asp-validation-for="Email"></span>
+
+                <label asp-for="Phone"></label>
+                <input asp-for="Phone" placeholder="Phone # (819) 274-3867" class="phoneNumbers">
+                <span asp-validation-for="Phone"></span>
+
+                <label asp-for="CellPhone"></label>
+                <input asp-for="CellPhone" placeholder="Cell # (819) 274-3867" class="phoneNumbers">
+                <span asp-validation-for="CellPhone"></span>
+            </div>
+        </fieldset>
+        <br>
+
+        <fieldset class="addOwnerField">
+            <legend>Address</legend>
+
+            <div class="addOwnerGrid">
+                <label asp-for="Street"></label>
+                <input asp-for="Street" placeholder="Street # and Street Name">
+                <span asp-validation-for="Street"></span>
+
+                <label asp-for="City"></label>
+                <input asp-for="City" placeholder="City Name">
+                <span asp-validation-for="City"></span>
+
+                <label asp-for="Province"></label>
+                <select asp-for="Province" asp-items="@new SelectList(Enum.GetValues(typeof(Owner.Provinces)))">
+                    <option value="0">--Select A Province--</option>
+                </select>
+                <span> </span>
+
+                <label asp-for="PostalCode"></label>
+                <input asp-for="PostalCode" placeholder="A0A8G5">
+                <span asp-validation-for="PostalCode"></span>
+            </div>
+        </fieldset>
+        <br>
+
+        <fieldset class="addOwnerField">
+            <legend>Veterinarian Information</legend>
+
+            <div class="addOwnerGrid">
+                <label asp-for="Veterinarian.Name"></label>
+                <input asp-for="Veterinarian.Name" placeholder="Veterinarian Full Name">
+                <span asp-validation-for="Veterinarian.Name"></span>
+
+                <label asp-for="Veterinarian.Phone"></label>
+                <input asp-for="Veterinarian.Phone" placeholder="Phone # (819) 274-3867" class="phoneNumbers">
+                <span asp-validation-for="Veterinarian.Phone"></span>
+
+                <label asp-for="Veterinarian.Street"></label>
+                <input asp-for="Veterinarian.Street" placeholder="Street # and Street Name">
+                <span asp-validation-for="Veterinarian.Street"></span>
+
+                <label asp-for="Veterinarian.City"></label>
+                <input asp-for="Veterinarian.City" placeholder="City Name">
+                <span asp-validation-for="Veterinarian.City"></span>
+
+                <label asp-for="Veterinarian.Province"></label>
+                <select asp-for="Veterinarian.Province" asp-items="@new SelectList(Enum.GetValues(typeof(Veterinarian.Provinces)))">
+                    <option value="0">--Select A Province--</option>
+                </select>
+                <span> </span>
+
+                <label asp-for="Veterinarian.PostalCode"></label>
+                <input asp-for="Veterinarian.PostalCode" placeholder="A0H7G5">
+                <span asp-validation-for="Veterinarian.PostalCode"></span>
+            </div>
+        </fieldset>
+        <br>
+
+        <fieldset class="addOwnerField">
+            <legend>Emergency Contact</legend>
+
+            <div class="addOwnerGrid">
+                <label asp-for="EmergencyContactFirstName"></label>
+                <input asp-for="EmergencyContactFirstName" placeholder="First Name">
+                <span asp-validation-for="EmergencyContactFirstName"></span>
+
+                <label asp-for="EmergencyContactLastName"></label>
+                <input asp-for="EmergencyContactLastName" placeholder="Last Name">
+                <span asp-validation-for="EmergencyContactLastName"></span>
+
+                <label asp-for="EmergencyContactPhone"></label>
+                <input asp-for="EmergencyContactPhone" placeholder="Phone # (819) 274-3867" class="phoneNumbers">
+                <span asp-validation-for="EmergencyContactPhone"></span>
+            </div>
+        </fieldset>
+        <br>
+
+        <fieldset class="addOwnerField">
+            <legend>Password</legend>
+            <div class="addOwnerGrid">
+                <label asp-for="Password"></label>
+                <input asp-for="Password">
+                <span asp-validation-for="Password"></span>
+            </div>
+        </fieldset>
+        <br>
+
+        <input type="submit" value="Create Account" class="btn btn-success" id="newOwnerBtn" data-toggle="tooltip" data-placement="right" title="Save the Owner" />
+    </form>
+</main>

@@ -1,0 +1,35 @@
+﻿@inject HVK_Queen.Models.FormattingService DisplayFormat
+
+@model HVK_Queen.Models.Owner
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<main>
+    <h3 class="text-center">Are you sure you want to delete this?</h3>
+    <p id="backToHomeLink">
+        <a class="btn btn-success" href="@Url.Action("Index", "Owner")" title="Return to Home Page">Back to home page</a>
+    </p>
+    <div>
+        <div class="card border-info mb-3" id="deleteOwnerDiv">
+            <div class="card-body">
+                <h5 class="card-title">@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h5>
+                <p class="card-text">Email: @Html.DisplayFor(model => model.Email)</p>
+                <p class="card-text">Phone Number: @DisplayFormat.PhoneFormat(Model.Phone)</p>
+                <p class="card-text">Cell Phone Number: @DisplayFormat.PhoneFormat(Model.CellPhone)</p>
+                <p class="card-text">Street Address: @Html.DisplayFor(model => model.Street)</p>
+                <p class="card-text">City: @Html.DisplayFor(model => model.City)</p>
+                <p class="card-text">Province: @Html.DisplayFor(model => model.Province)</p>
+                <p class="card-text">Postal Code: @Html.DisplayFor(model => model.PostalCode)</p>
+                <p class="card-text">Emergency Contact Name: @Html.DisplayFor(model => model.EmergencyContactFirstName) @Html.DisplayFor(model => model.EmergencyContactLastName)</p>
+                <p class="card-text">Emergency Contact Phone Number: @DisplayFormat.PhoneFormat(Model.EmergencyContactPhone)</p>
+                <p class="card-text">Veterinarian: @Html.DisplayFor(model => model.Veterinarian.Name)</p>
+                <p class="card-text">Password: @Html.DisplayFor(model => model.Password)</p>
+                <form asp-action="DeleteConfirmed" asp-controller="Owner">
+                    <input type="hidden" asp-for="OwnerId" />
+                    <input type="submit" value="Delete Account" class="btn btn-danger" />
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,27 @@
+﻿@inject HVK_Queen.Models.FormattingService DisplayFormat
+@model HVK_Queen.Models.Owner
+
+<div class="info">
+    <p class="infoLabel">Name: </p>
+    <p class="infoValue">@Model.FirstName @Model.LastName</p>
+
+
+    @if (Model.Street != null && Model.City != null && Model.Province != null && Model.PostalCode != null) {
+        <p class="infoLabel">Address: </p>
+        <p class="infoValue">@Model.Street, <br /> @Model.City, @Model.Province <br /> @DisplayFormat.DisplayPostalCode(@Model.PostalCode)</p>
+    } else {
+        <p class="infoLabel">Email: </p>
+        <p class="infoValue">@Model.Email</p>
+    }
+
+
+    @if (Model.Phone != null) {
+        <p class="infoLabel">Phone #: </p>
+        <p class="infoValue">@DisplayFormat.PhoneFormat(@Model.Phone)</p>
+    } else if (Model.CellPhone != null) {
+        <p class="infoLabel">Cell Phone #: </p>
+        <p class="infoValue">@DisplayFormat.PhoneFormat(@Model.CellPhone)</p>
+    } else {
+        <span>Phone Not Given</span>
+    }
+</div>

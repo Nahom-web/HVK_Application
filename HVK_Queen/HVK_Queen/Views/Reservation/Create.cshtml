@@ -1,0 +1,67 @@
+﻿@model HVK_Queen.Models.Reservation
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<main>
+    <form asp-action="Create" asp-controller="Reservation" id="createReservationForm">
+        @await Html.PartialAsync("_ReservationDates")
+
+        <ul class="nav nav-tabs center" id="myTab" role="tablist">
+            @foreach (var pet in ViewBag.OwnerPets) {
+                <li class="nav-item">
+                    <a class="nav-link" id="@pet.Name-tab" data-toggle="tab" href="#@pet.Name" role="tab" aria-controls="@pet.Name" aria-selected="false">@pet.Name</a>
+                </li>
+            }
+        </ul>
+        <div class="tab-content">
+            @foreach (var petRes in Model.PetReservation) {
+                @foreach (var pet in ViewBag.OwnerPets) {
+                    @if (petRes.PetId == pet.PetId) {
+                        <div class="tab-pane fade" id="@pet.Name" role="tabpanel" aria-labelledby="@pet.Name-tab">
+                            @await Html.PartialAsync("_ReservationPetServices", petRes)
+
+                            @for (int i = 0; i < petRes.Medications.Count; i++) {
+                                <div id="medicationContainer">
+                                    <fieldset class="InfoGridFieldset">
+                                        <legend>Medication</legend>
+                                        <div class="gridForm">
+                                            <label asp-for="@petRes.Medications[i].Name"></label>
+                                            <input asp-for="@petRes.Medications[i].Name" name="MedicationName"/>
+                                            <span asp-validation-for="@petRes.Medications[i].Name"></span>
+
+                                            <label asp-for="@petRes.Medications[i].EndDate"></label>
+                                            <input asp-for="@petRes.Medications[i].EndDate" name="MedicationEndDate"/>
+                                            <span asp-validation-for="@petRes.Medications[i].EndDate"></span>
+
+                                            <label asp-for="@petRes.Medications[i].Dosage"></label>
+                                            <input asp-for="@petRes.Medications[i].Dosage" name="MedicationDosage"/>
+                                            <span asp-validation-for="@petRes.Medications[i].Dosage"></span>
+
+                                            <label asp-for="@petRes.Medications[i].SpecialInstruct"></label>
+                                            <textarea asp-for="@petRes.Medications[i].SpecialInstruct" name="MedicationSpecialInstruct"></textarea>
+                                            <span asp-validation-for="@petRes.Medications[i].SpecialInstruct"></span>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            }
+                            <div id="InfoWrapperBtn" class="detailsGrid">
+                                <input type="submit" value="Add New Medication" formaction="@Url.Action("CreateNewMedication", "Reservation", new { petId = petRes.PetId})" />
+                            </div>
+                           
+                        </div>
+                    }
+
+                }
+            }
+        </div>
+
+        <div id="InfoWrapperBtn" class="detailsGrid">
+
+            <input type="submit" value="Create Reservation" class="btn btn-success viewInfo" />
+        </div>
+    </form>
+</main>
+

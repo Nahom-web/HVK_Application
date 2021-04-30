@@ -1,0 +1,104 @@
+﻿@{
+    Layout = "_ClerkLayout";
+}
+
+@model HVK_Queen.Models.Reservation
+
+<main>
+    <h3 class="reservationInformationTitle">Reservation Information</h3>
+
+    <div class="ResInfo">
+        <p class="text-right font-weight-bold">Reservation Status:</p>
+        <p class="value">@Model.GetReservationStatusName(Model.Status)</p>
+
+        <p class="text-right font-weight-bold">Name:</p>
+        <p class="value">@Model.PetReservation.First().Pet.Owner.FirstName @Model.PetReservation.First().Pet.Owner.LastName</p>
+
+        <p class="text-right font-weight-bold">Reservation Start Date:</p>
+        <p class="value">@Model.StartDate.ToString("MMM dd, yyyy")</p>
+
+        <p class="text-right font-weight-bold">Reservation End Date:</p>
+        <p class="value">@Model.EndDate.ToString("MMM dd, yyyy")</p>
+    </div>
+
+    <br />
+    <h3 class="text-center petsTitle">Pets</h3>
+
+    <div class="petsDiv">
+        @foreach (var petRes in Model.PetReservation) {
+            <table class="table table-bordered petsTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Vaccinations</th>
+                        <th>Services</th>
+                        <th>Mediaction</th>
+                        <th>Special Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="petTd">@petRes.Pet.Name</td>
+                        <td id="vaccinationsBox">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th class="text-center">Name</th>
+                                    <th class="text-center">Expiry Date</th>
+                                </tr>
+                                @if (petRes.Pet.PetVaccination.Count != 0) {
+                                    @foreach (var petVac in petRes.Pet.PetVaccination) {
+                                        <tr>
+                                            <td>@petVac.Name</td>
+                                            <td contenteditable='true' type="date">@petVac.ExpiryDate.ToString("MMM dd, yyyy")</td>
+                                        </tr>
+                                    }
+                                } else {
+                                    <tr>
+                                        <td colspan="3" class="text-center">No Vaccinations Listed</td>
+                                    </tr>
+                                }
+                            </table>
+                        </td>
+                        <td class="petTd">
+                            @if (petRes.PetReservationService.Count != 0) {
+                                <ol>
+                                    @foreach (var s in petRes.PetReservationService) {
+                                        <li>@s.Service.ServiceDescription</li>
+                                    }
+                                </ol>
+                            } else {
+                                <p class="text-center">No Services Added</p>
+                            }
+                        </td>
+                        <td class="petTd" id="medicationBox">
+                            @if (petRes.Medications.Count != 0) {
+                                @foreach (var med in petRes.Medications) {
+                                    <div id="medicationSummary">
+                                        <p><span class="medicationKey">Name: </span><span class="medicationValue">@med.Name</span></p>
+                                        <p><span class="medicationKey">Dosage: </span><span class="medicationValue">@med.Dosage</span></p>
+                                        <p><span class="medicationKey">End date: </span><span class="medicationValue">@med.EndDate</span></p>
+                                        <p><span class="medicationKey">Special instructions: </span><span class="medicationValue">@med.SpecialInstruct</span></p>
+                                    </div>
+                                    <br />
+                                }
+                            } else {
+                                <span class="text-center">No Medications Added</span>
+                            }
+                        </td>
+                        <td class="petTd">
+                            @if (@petRes.Pet.SpecialNotes != null) {
+                                @petRes.Pet.SpecialNotes.Notes
+                            } else {
+                                <span class="text-center">No Special Notes Added</span>
+                            }
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+    </div>
+    <br />
+    <div class="text-center">
+        <a class="btn btn-danger text-center" href="@Url.Action("Invoice", "Clerk", new { id = Model.ReservationId })">End Pet Visit</a>
+    </div>
+</main>
