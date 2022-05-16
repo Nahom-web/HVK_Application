@@ -1,20 +1,16 @@
-# HVK_Application
-
-===================
+# HVK Application
 
 Web Programming IV
 
 Assignment 4
 
-## Description ##
+*Description*: My team and I build an application based on the Happy Valley Kennels (HVK) system, and boarding kennel for dogs.
 
-My team and I build an application based on the Happy Valley Kennels (HVK) system, and boarding kennel for dogs.
+*Computer program used*: Visual Studio 2019
 
-Computer program used: Visual Studio 2019
+*Frameworks used*: ASP.NET Framework Core 3.1
 
-Frameworks used: ASP.NET Framework Core 3.1
-
-languages used: C#, HTML, JavaScript and CSS.
+*languages used*: C#, HTML, JavaScript and CSS.
 
 
 ## learning outcomes: ##
